@@ -2,7 +2,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { Provider } from "react-redux";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
-import { Home } from "./pages/home/home";
+import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { NoMatch } from "./pages/no-match";
 import { PostList } from "./pages/post-list";
