@@ -5,6 +5,7 @@ import { Posts } from "../../components/ui/post-list";
 import { State } from "../../redux/reducers";
 import { PostsState } from "../../redux/reducers/postsReducer";
 import { commonStyle, ROUTES } from "../../utils/const";
+import { PostsPagination } from "../../components/features/posts-pagination";
 
 export const PostList: FC = () => {
   const { posts, error, isLoading } = useSelector<State, PostsState>(
@@ -24,10 +25,14 @@ export const PostList: FC = () => {
       >
         Вернуться на главную
       </Link>
-      {isLoading && <div style={commonStyle}>Loading....</div>}
       {!!error && <div style={commonStyle}>{error}</div>}
       {!error && !posts.length && <div style={commonStyle}>Нет данных</div>}
-      {!error && !!posts.length && <Posts posts={posts} />}
+      {!error && !!posts.length && (
+        <>
+          <Posts posts={posts} />
+          <PostsPagination />
+        </>
+      )}
     </div>
   );
 };

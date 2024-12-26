@@ -8,8 +8,11 @@ import { SET_FETCH_ERROR } from "../const";
 export function* handlePosts(query: URLSearchParams): unknown {
   yield put(setPostsLoading({ isLoading: true }));
   try {
-    const posts = yield call(postsApi.getPosts, query);
+    const { data: posts, headers } = yield call(postsApi.getPosts, query);
     yield put(setPosts({ posts }));
+    console.log(headers);
+
+    // yield put(setPosts({ posts }));
   } catch {
     yield put({
       type: SET_FETCH_ERROR,
