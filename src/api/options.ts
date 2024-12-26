@@ -20,8 +20,6 @@ export const makeRequest = ({
 }) => {
   const { url, method } = reqTemplates[type];
 
-  console.log("makeRequest");
-
   const reqHeaders = new Headers({ ...reqOptions?.headers });
   reqHeaders.append("Authorization", `Bearer ${getAccessToken() || ""}`);
 
@@ -33,7 +31,6 @@ export const makeRequest = ({
 
   const completeUrl = new URL(url, BASE_URL);
   query?.forEach((value, key) => completeUrl.searchParams.append(key, value));
-  console.log(completeUrl);
 
   return new Request(completeUrl, options);
 };

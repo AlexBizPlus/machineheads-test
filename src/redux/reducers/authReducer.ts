@@ -1,5 +1,5 @@
 import { Action } from "redux";
-import { LOGIN_FAILURE, LOGIN_SUCCESS } from "../const";
+import { LOGIN_ERROR, LOGIN_SUCCESS } from "../const";
 
 export interface AuthState {
   isAuth: boolean;
@@ -18,9 +18,9 @@ export const auth = (state = initialState, { type, payload }: AuthAction) => {
     case LOGIN_SUCCESS:
       return {
         isAuth: true,
-        expiresAt: payload?.accessExpiredAt,
+        accessExpiredAt: payload?.accessExpiredAt,
       };
-    case LOGIN_FAILURE:
+    case LOGIN_ERROR:
       return {
         ...initialState,
       };

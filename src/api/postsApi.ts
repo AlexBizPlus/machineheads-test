@@ -1,10 +1,12 @@
 import { makeRequest } from "./options";
 
-export const getPosts = async (query: URLSearchParams) => {
-  console.log("getPosts", query);
-
+const getPosts = async (query: URLSearchParams) => {
   const req = makeRequest({ type: "posts", query });
 
   const res = await fetch(req);
   return await res.json();
+};
+
+export const postsApi = {
+  getPosts,
 };

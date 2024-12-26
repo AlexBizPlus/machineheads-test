@@ -1,5 +1,5 @@
 import { Credentials } from "../../types";
-import { LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS } from "../const";
+import { LOGIN, LOGIN_ERROR, LOGIN_SUCCESS } from "../const";
 import { AuthState } from "../reducers/authReducer";
 
 export const loginRequest = (payload: Credentials) => ({
@@ -13,5 +13,5 @@ export const setAuth = (payload: Partial<AuthState>) => ({
 });
 
 export const clearAuth = () => ({
-  type: LOGIN_FAILURE,
+  type: LOGIN_ERROR,
 });

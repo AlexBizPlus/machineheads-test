@@ -1,6 +1,6 @@
 import { LOCATION_CHANGE } from "connected-react-router";
 import { call, put, select, takeLatest } from "redux-saga/effects";
-import { getPosts } from "../../api/postsApi";
+import { postsApi } from "../../api/postsApi";
 import { ROUTES } from "../../utils/const";
 import { setPosts, setPostsLoading } from "../actions/postsActions";
 import { SET_FETCH_ERROR } from "../const";
@@ -8,12 +8,12 @@ import { SET_FETCH_ERROR } from "../const";
 export function* handlePosts(query: URLSearchParams): unknown {
   yield put(setPostsLoading({ isLoading: true }));
   try {
-    const posts = yield call(getPosts, query);
+    const posts = yield call(postsApi.getPosts, query);
     yield put(setPosts({ posts }));
   } catch {
     yield put({
       type: SET_FETCH_ERROR,
-      payload: "Error fetching popular news",
+      payload: { error: "Error fetching popular news" },
     });
   } finally {
     yield put(setPostsLoading({ isLoading: false }));
