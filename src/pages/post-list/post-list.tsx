@@ -7,9 +7,11 @@ import { PostsState } from "../../redux/reducers/postsReducer";
 import { commonStyle, ROUTES } from "../../utils/const";
 
 export const PostList: FC = () => {
-  const { posts, error } = useSelector<State, PostsState>(
+  const { posts, error, isLoading } = useSelector<State, PostsState>(
     (store) => store.posts
   );
+
+  if (isLoading) return <div>Loading....</div>;
 
   return (
     <div>
@@ -22,6 +24,7 @@ export const PostList: FC = () => {
       >
         Вернуться на главную
       </Link>
+      {isLoading && <div style={commonStyle}>Loading....</div>}
       {!!error && <div style={commonStyle}>{error}</div>}
       {!error && !posts.length && <div style={commonStyle}>Нет данных</div>}
       {!error && !!posts.length && <Posts posts={posts} />}
