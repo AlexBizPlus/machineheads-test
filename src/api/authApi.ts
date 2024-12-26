@@ -10,9 +10,12 @@ export const login = async (email: string, password: string) => {
   formData.append("email", email);
   formData.append("password", password);
 
-  const req = makeRequest("login", {
-    headers: httpHeader,
-    body: formData,
+  const req = makeRequest({
+    type: "login",
+    reqOptions: {
+      headers: httpHeader,
+      body: formData,
+    },
   });
 
   const res = await fetch(req);

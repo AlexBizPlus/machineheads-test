@@ -1,7 +1,8 @@
-import { all, spawn } from "redux-saga/effects";
+import { spawn } from "redux-saga/effects";
 import { watchAuth } from "./authSaga";
+import { postsAuth } from "./postsSaga";
 
 export default function* rootSaga() {
   yield spawn(watchAuth);
-  //   yield spawn(saga2); // news
+  yield spawn(postsAuth);
 }

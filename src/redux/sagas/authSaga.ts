@@ -1,4 +1,4 @@
-import { call, put, spawn, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { login } from "../../api/authApi";
 import { ROUTES } from "../../utils/const";
 import { storeAccessToken, storeRefreshToken } from "../../utils/functions";
@@ -25,8 +25,4 @@ function* handleLogin(action: any): unknown {
 
 export function* watchAuth() {
   yield takeLatest(LOGIN, handleLogin);
-}
-
-export default function* rootSaga() {
-  yield spawn(watchAuth);
 }
