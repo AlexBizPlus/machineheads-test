@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../../redux/actions/authActions";
+import { commonStyle } from "../../utils/const";
 
 export const Login: FC = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export const Login: FC = () => {
           defaultValue={import.meta.env.VITE_EMAIL ?? ""}
           required
           autoComplete="new-email"
+          style={commonStyle}
         />
         <input
           type="password"
@@ -33,8 +35,11 @@ export const Login: FC = () => {
           required
           defaultValue={import.meta.env.VITE_PASSWORD ?? ""}
           autoComplete="new-password"
+          style={commonStyle}
         />
-        <button type="submit">Войти</button>
+        <button style={commonStyle} type="submit">
+          Войти
+        </button>
       </form>
     </div>
   );

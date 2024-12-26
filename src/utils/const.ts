@@ -6,3 +6,5 @@ export const ROUTES = {
   Login: "/login",
   Posts: "/posts",
 };
+
+export const commonStyle = { display: "block", marginTop: "0.5rem" };

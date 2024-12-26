@@ -17,7 +17,7 @@ function* handleLogin(action: any): unknown {
     yield put(setAuth({ accessExpiredAt: data.accessExpiredAt }));
     storeAccessToken(data.accessToken);
     storeRefreshToken(data.refreshToken);
-    yield put(push(ROUTES.Posts));
+    yield put(push(ROUTES.Home));
   } catch (error) {
     console.error("Login failed:", error);
   }
