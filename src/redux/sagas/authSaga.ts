@@ -1,21 +1,32 @@
-function* handleLogin(action: any) {
+import { call, put, spawn, takeLatest } from "redux-saga/effects";
+import { login } from "../../api/authApi";
+import { ROUTES } from "../../utils/const";
+import { storeAccessToken, storeRefreshToken } from "../../utils/functions";
+import { setAuth } from "../actions/authActions";
+import { LOGIN } from "../const";
+import { push } from "connected-react-router";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function* handleLogin(action: any): unknown {
   try {
     const data = yield call(
       login,
-      action.payload.username,
+      action.payload.email,
       action.payload.password
     );
-
-    yield put(setTokens(data.token, data.refreshToken));
-    document.cookie = `token=${data.token}; path=/;`;
-    document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
+    yield put(setAuth({ accessExpiredAt: data.accessExpiredAt }));
+    storeAccessToken(data.accessToken);
+    storeRefreshToken(data.refreshToken);
+    yield put(push(ROUTES.Posts));
   } catch (error) {
     console.error("Login failed:", error);
-    // Обработка ошибки (например, показать уведомление)
   }
 }
 
 export function* watchAuth() {
-  yield takeLatest("LOGIN_REQUEST", handleLogin);
-  yield takeLatest("REFRESH_TOKEN_REQUEST", handleRefreshToken);
+  yield takeLatest(LOGIN, handleLogin);
+}
+
+export default function* rootSaga() {
+  yield spawn(watchAuth);
 }

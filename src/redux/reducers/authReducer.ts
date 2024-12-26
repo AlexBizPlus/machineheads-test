@@ -6,7 +6,7 @@ export interface AuthState {
   accessExpiredAt: number | undefined;
 }
 
-type AuthPayload = Action & { payload?: Partial<AuthState> };
+export type AuthPayload = Action & { payload?: Partial<AuthState> };
 
 const initialState: AuthState = {
   isAuth: false,

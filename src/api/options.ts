@@ -1,11 +1,28 @@
+import { getAccessToken } from "../utils/functions";
+
 export const BASE_URL = "https://rest-test.machineheads.ru";
 
-export const LOGIN_URL = "/auth/token-generate";
-export const REFRESH_URL = "/auth/token-refresh";
+const reqTemplates = {
+  login: { url: "/auth/token-generate", method: "POST" },
+  refresh: { url: "/auth/token-refresh", method: "POST" },
+  posts: { url: "/manage/posts", method: "GET" },
+  postDetails: { url: "/manage/posts/detail", method: "GET" },
+};
 
-export const POST_LIST_URL = "/manage/posts";
-export const POST_DETAILS_URL = "/manage/posts/detail";
+export const makeRequest = (
+  type: keyof typeof reqTemplates,
+  reqOptions?: RequestInit
+) => {
+  const { url, method } = reqTemplates[type];
 
-const makeRequest = () => {
-  return new Request();
+  const reqHeaders = new Headers({ ...reqOptions?.headers });
+  reqHeaders.append("Authorization", `Bearer ${getAccessToken() || ""}`);
+
+  const options: RequestInit = {
+    ...reqOptions,
+    headers: reqHeaders,
+    method,
+  };
+
+  return new Request(`${BASE_URL}${url}`, options);
 };
