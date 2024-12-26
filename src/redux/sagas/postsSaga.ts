@@ -3,12 +3,12 @@ import { call, put, select, takeLatest } from "redux-saga/effects";
 import { SET_FETCH_ERROR, SET_LOADING } from "../const";
 import { ROUTES } from "../../utils/const";
 import { getPosts } from "../../api/postsApi";
+import { setPosts } from "../actions/postsActions";
 
 export function* handlePosts(query: URLSearchParams): unknown {
   try {
-    const data = yield call(getPosts, query);
-    // yield put(setPosts(hits));
-    console.log("Posts", data);
+    const posts = yield call(getPosts, query);
+    yield put(setPosts({ posts }));
   } catch {
     yield put({
       type: SET_FETCH_ERROR,

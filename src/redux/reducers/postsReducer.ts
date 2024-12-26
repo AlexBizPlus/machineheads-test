@@ -1,29 +1,30 @@
 import { Action } from "redux";
-import { LOGIN_FAILURE, LOGIN_SUCCESS } from "../const";
 import { PostRes } from "../../types";
+import { SET_FETCH_ERROR, SET_POSTS } from "../const";
 
 export interface PostsState {
   posts: PostRes[];
   error: string | null;
 }
 
-export type AuthPayload = Action & { payload?: Partial<PostsState> };
+export type PostsAction = Action & { payload?: Partial<PostsState> };
 
 const initialState: PostsState = {
   posts: [],
   error: null,
 };
 
-export const auth = (state = initialState, { type, payload }: AuthPayload) => {
+export const posts = (state = initialState, { type, payload }: PostsAction) => {
   switch (type) {
-    case LOGIN_SUCCESS:
+    case SET_POSTS:
       return {
-        isAuth: true,
-        expiresAt: payload?.accessExpiredAt,
+        posts: payload?.posts ?? [],
+        error: null,
       };
-    case LOGIN_FAILURE:
+    case SET_FETCH_ERROR:
       return {
-        ...initialState,
+        posts: [],
+        error: payload?.error ?? "Ошибка",
       };
     default:
       return state;

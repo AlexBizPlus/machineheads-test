@@ -1,7 +1,7 @@
 import { PostRes } from "../../types";
 import { SET_FETCH_ERROR, SET_POSTS } from "../const";
 
-export const setPosts = (payload: PostRes[]) => ({
+export const setPosts = (payload: { posts: PostRes[] }) => ({
   type: SET_POSTS,
   payload,
 });

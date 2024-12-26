@@ -18,6 +18,7 @@ export const Login: FC = () => {
 
   return (
     <div>
+      <div style={commonStyle}>Login Page</div>
       <form onSubmit={login} autoComplete="none">
         <input
           type="text"

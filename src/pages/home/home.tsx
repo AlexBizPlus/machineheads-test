@@ -4,9 +4,12 @@ import { State } from "../../redux/reducers";
 import { commonStyle, ROUTES } from "../../utils/const";
 import { Link } from "react-router-dom";
 import { clearAuth } from "../../redux/actions/authActions";
+import { AuthState } from "../../redux/reducers/authReducer";
 
 export const Home: FC = () => {
-  const isAuth = useSelector<State>((store) => store.auth.isAuth);
+  const isAuth = useSelector<State, AuthState["isAuth"]>(
+    (store) => store.auth.isAuth
+  );
   const dispatch = useDispatch();
 
   const handleLogout = () => dispatch(clearAuth());
