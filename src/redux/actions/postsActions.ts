@@ -1,7 +1,7 @@
-import { PostRes } from "../../types";
-import { SET_FETCH_ERROR, SET_POSTS, SET_LOADING } from "../const";
+import { SET_FETCH_ERROR, SET_LOADING, SET_POSTS } from "../const";
+import { PostsState } from "../reducers/postsReducer";
 
-export const setPosts = (payload: { posts: PostRes[] }) => ({
+export const setPosts = (payload: Partial<PostsState>) => ({
   type: SET_POSTS,
   payload,
 });

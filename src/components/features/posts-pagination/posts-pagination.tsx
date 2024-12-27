@@ -2,23 +2,36 @@ import { push, RouterState } from "connected-react-router";
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../../redux/reducers";
+import { PostsState } from "../../../redux/reducers/postsReducer";
+
+const FIRST_PAGE = 1;
 
 export const PostsPagination: FC = () => {
-  const current = 1;
-
   const router = useSelector<State, RouterState>((store) => store.router);
   const path = router.location.pathname ?? "/";
 
+  const { current, total } = useSelector<State, PostsState["pages"]>(
+    (store) => store.posts.pages
+  );
+
   const dispatch = useDispatch();
 
-  const handleBack = () => {
-    console.log("router", router);
+  if (!current || !total) return null;
 
-    // path.searchParams.set("page", "2");
-    // console.log("path", path);
+  const handleBack = () => {
+    const prevPage = current - 1;
+    if (prevPage < FIRST_PAGE) return;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    dispatch(push(path + "?page=2") as any);
+    dispatch(push(path + "?page=" + prevPage) as any);
+  };
+
+  const handleForward = () => {
+    const nextPage = current + 1;
+    if (nextPage > total) return;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dispatch(push(     path + "?page=" + nextPage) as any);
   };
 
   return (
@@ -29,11 +42,21 @@ export const PostsPagination: FC = () => {
         alignItems: "center",
       }}
     >
-      <button type="button" onClick={handleBack}>
+      <button
+        type="button"
+        onClick={handleBack}
+        disabled={current === FIRST_PAGE}
+      >
         {"<-"}
       </button>
       <span>{current}</span>
-      <button type="button">{"->"}</button>
+      <button
+        type="button"
+        onClick={handleForward}
+        disabled={current === total}
+      >
+        {"->"}
+      </button>
     </div>
   );
 };
