@@ -10,7 +10,7 @@ export function* handlePosts(query: URLSearchParams): unknown {
   try {
     const { data: posts, headers } = yield call(postsApi.getPosts, query);
     yield put(setPosts({ posts }));
-    console.log(headers);
+    console.log("headers", headers);
 
     // yield put(setPosts({ posts }));
   } catch {

@@ -5,14 +5,12 @@ const getPosts = async (query: URLSearchParams) => {
 
   const res = await fetch(req);
 
-  const headers = res.headers;
-  res.headers.forEach(console.log);
+  const headers: Record<string, string> = {};
+  for (const [key, value] of res.headers.entries()) {
+    headers[key] = value;
+  }
 
   const data = await res.json();
-
-  // console.log(res);
-  // console.log(res.headers.get("X-Pagination-Current-Page"));
-
   return { data, headers };
 };
 
