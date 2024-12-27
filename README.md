@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
+# Разработать панель администратора на react js
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Приложение должно обмениваться данными по REST API с бекендом.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Документация REST API:
+http://rest-test.machineheads.ru/documentation/
 
-## Expanding the ESLint configuration
+## REST API приложение:
+http://rest-test.machineheads.ru/
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Для тестирования методов API можете использовать коллекцию в Postman:
+https://drive.google.com/file/d/1-wic6-oP_UQlnktrQEZESYv02YYAWKRf/view?usp=sharing
 
-- Configure the top-level `parserOptions` property like this:
+(!)
+Дизайн приложения значения не имеет (хоть голый HTML) или можете использовать любую UI библиотеку.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Минимальный функционал для панели администратора:
+Авторизация с сохранением токена и рефреш-токена в куках;
+Обновление токена с помощью рефреш-токена, при истечении времени жизни токена;
+Список постов с постраничной навигацией (информация для постранички возвращается в заголовках ответа на запрос списка постов).
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Максимальный функционал для панели администратора (по желанию):
+Добавление поста;
+Редактирование поста;
+Удаление поста;
+Список/добавление/редактирование/удаление авторов;
+Список/добавление/редактирование/удаление тегов.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+При добавлении и редактировании поста обязательно обрабатывать ошибки валидации данных а также системные ошибки, возвращаемые REST приложением и выводить их в форме.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Для авторизации используйте данные:
+E-mail: XXXX
+Пароль: XXXX
+
+## При разработке обязательно использовать библиотеки:
+react
+redux
+redux-saga
+react-router-dom
+connected-react-router
+Обязательно использование TypeScript. 
+Остальные библиотеки на ваше усмотрение.
+
+## Не обязательно, но будет плюсом использование в разработке:
+UI библиотека https://ant.design/
+Lazy load components
+Lazy load redux reducers https://github.com/microsoft/redux-dynamic-modules
